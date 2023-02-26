@@ -39,7 +39,7 @@ def _player_death(game_event):
 
     ignore_round_win.set_bool(False)
     try:
-        team = players[0].team
+        team = players[0].team_index
     except IndexError:
         team = None
 
