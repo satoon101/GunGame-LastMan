@@ -15,12 +15,11 @@ from listeners.tick import Delay
 # GunGame
 from gungame.core.status import GunGameRoundStatus, GunGameStatus
 
-
 # =============================================================================
 # >> GLOBAL VARIABLES
 # =============================================================================
-ignore_round_win = ConVar('mp_ignore_round_win_conditions')
-_alive_players = PlayerIter('alive')
+ignore_round_win = ConVar("mp_ignore_round_win_conditions")
+_alive_players = PlayerIter("alive")
 _win_conditions = {
     2: 8,
     3: 7,
@@ -30,7 +29,7 @@ _win_conditions = {
 # =============================================================================
 # >> GAME EVENTS
 # =============================================================================
-@Event('player_death')
+@Event("player_death")
 def _player_death(game_event):
     """End the round if only 1 player remaining alive."""
     players = list(_alive_players)
@@ -49,6 +48,6 @@ def _player_death(game_event):
 def _reset_convar(reason):
     """Verify that the round has not already ended, and end the round."""
     if GunGameStatus.ROUND is GunGameRoundStatus.ACTIVE:
-        Entity.find_or_create('info_map_parameters').fire_win_condition(reason)
+        Entity.find_or_create("info_map_parameters").fire_win_condition(reason)
 
     Delay(0, ignore_round_win.set_bool, (True,))
